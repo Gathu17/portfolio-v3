@@ -1,0 +1,281 @@
+---
+// Hero component
+---
+
+<section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900">
+	<!-- Three.js Canvas Container -->
+	<div id="threeContainer" class="absolute inset-0 w-full h-full"></div>
+	
+	<!-- Content -->
+	<div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+		<div class="space-y-8">
+			<!-- Greeting with Glow Effect -->
+			<div class="animate-fade-in-up">
+				<p class="text-lg text-blue-300 font-medium mb-4 tracking-wider uppercase">
+					<span class="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+						Hello, I'm
+					</span>
+				</p>
+			</div>
+			
+			<!-- Name with 3D Effect -->
+			<div class="animate-fade-in-up animation-delay-200">
+				<h1 class="text-6xl md:text-8xl font-bold mb-6 text-white drop-shadow-2xl">
+					<span class="bg-gradient-to-r from-white via-blue-100 to-purple-100 bg-clip-text text-transparent animate-gradient-x">
+						Jerry Gathu
+					</span>
+				</h1>
+			</div>
+			
+			<!-- Title with Typing Effect -->
+			<div class="animate-fade-in-up animation-delay-400">
+				<h2 class="text-2xl md:text-4xl text-gray-300 font-light mb-8">
+					<span class="bg-gradient-to-r from-blue-300 to-purple-300 bg-clip-text text-transparent">
+						Software & AI Engineer
+					</span>
+				</h2>
+			</div>
+			
+			<!-- Description with Enhanced Styling -->
+			<div class="animate-fade-in-up animation-delay-600">
+				<p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed mb-12 backdrop-blur-sm bg-white/5 rounded-2xl p-6 border border-white/10">
+					Building intelligent solutions that bridge the gap between cutting-edge AI research and real-world applications. 
+					<span class="text-blue-300 font-medium">Passionate about creating products that make a difference.</span>
+				</p>
+			</div>
+			
+			<!-- Enhanced CTA Buttons -->
+			<div class="animate-fade-in-up animation-delay-800 flex flex-col sm:flex-row gap-6 justify-center">
+				<a href="#projects" class="group relative inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-blue-500/25 overflow-hidden">
+					<span class="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
+					<span class="relative z-10 flex items-center">
+						View My Work
+						<svg class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+						</svg>
+					</span>
+				</a>
+				<a href="#contact" class="group relative inline-flex items-center justify-center px-8 py-4 border-2 border-white/30 text-white font-semibold rounded-xl hover:bg-white/10 backdrop-blur-sm transform hover:scale-105 transition-all duration-300 overflow-hidden">
+					<span class="absolute inset-0 bg-gradient-to-r from-white/0 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+					<span class="relative z-10">Get In Touch</span>
+				</a>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Enhanced Scroll Indicator -->
+	<div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+		<div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+			<div class="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
+		</div>
+	</div>
+</section>
+
+<!-- Load Three.js from CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		// Check if Three.js is loaded
+		if (typeof THREE === 'undefined') {
+			console.error('Three.js not loaded');
+			return;
+		}
+
+		const container = document.getElementById('threeContainer');
+		if (!container) return;
+
+		// Scene setup
+		const scene = new THREE.Scene();
+		const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+		const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+		
+		// Set renderer properties
+		renderer.setSize(window.innerWidth, window.innerHeight);
+		renderer.setClearColor(0x000000, 0); // Transparent background
+		container.appendChild(renderer.domElement);
+
+		// Particle system
+		const particleCount = 3000;
+		const geometry = new THREE.BufferGeometry();
+		const positions = new Float32Array(particleCount * 3);
+		const colors = new Float32Array(particleCount * 3);
+		const originalPositions = new Float32Array(particleCount * 3);
+
+		// Generate particles in a sphere pattern
+		const phi = Math.PI * (Math.sqrt(5) + 1);
+		for (let i = 0; i < particleCount; i++) {
+			const y = 1 - (i / (particleCount - 1)) * 2;
+			const radius = Math.sqrt(1 - y * y);
+			const theta = phi * i;
+
+			const x = Math.cos(theta) * radius;
+			const z = Math.sin(theta) * radius;
+
+			positions[i * 3] = x * 300;
+			positions[i * 3 + 1] = y * 300;
+			positions[i * 3 + 2] = z * 300;
+			
+			originalPositions[i * 3] = x * 300;
+			originalPositions[i * 3 + 1] = y * 300;
+			originalPositions[i * 3 + 2] = z * 300;
+
+			// Blue-purple color scheme
+			colors[i * 3] = 0.3 + Math.random() * 0.4;     // Blue
+			colors[i * 3 + 1] = 0.1 + Math.random() * 0.3; // Green
+			colors[i * 3 + 2] = 0.6 + Math.random() * 0.4; // Purple
+		}
+
+		geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+		geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+		const material = new THREE.PointsMaterial({ 
+			size: 3, 
+			vertexColors: true,
+			transparent: true,
+			opacity: 0.8
+		});
+		
+		const particles = new THREE.Points(geometry, material);
+		scene.add(particles);
+
+		camera.position.z = 600;
+
+		// Mouse tracking
+		let mouseX = 0, mouseY = 0;
+		let isHovering = false;
+
+		container.addEventListener('mousemove', (event) => {
+			mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+			mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+			isHovering = true;
+		});
+
+		container.addEventListener('mouseleave', () => {
+			isHovering = false;
+		});
+
+		// Animation loop
+		function animate() {
+			requestAnimationFrame(animate);
+
+			// Rotate particles slowly
+			particles.rotation.y += 0.0005;
+			particles.rotation.x += 0.0002;
+
+			// Apply electromagnetic distortion on hover
+			const posArray = particles.geometry.attributes.position.array;
+			const colorArray = particles.geometry.attributes.color.array;
+			
+			for (let i = 0; i < particleCount; i++) {
+				const ix = i * 3;
+				const iy = i * 3 + 1;
+				const iz = i * 3 + 2;
+
+				const px = posArray[ix] / 300;
+				const py = posArray[iy] / 300;
+				const pz = posArray[iz] / 300;
+				const dist = Math.sqrt((px - mouseX) ** 2 + (py - mouseY) ** 2 + pz ** 2);
+
+				if (isHovering && dist < 1.5) {
+					// Electromagnetic field distortion
+					const repelStrength = (1.5 - dist) * 50 * Math.sin(0.003 + i * 0.01);
+					const dirX = (px - mouseX) / dist;
+					const dirY = (py - mouseY) / dist;
+					const dirZ = pz / dist;
+
+					posArray[ix] += dirX * repelStrength;
+					posArray[iy] += dirY * repelStrength;
+					posArray[iz] += dirZ * repelStrength;
+
+					// Change colors based on electromagnetic field
+					// colorArray[ix] = 0.8 + (1 - dist) * 0.2; // Brighter blue
+					// colorArray[iy] = 0.3 + (1 - dist) * 0.7; // Brighter green
+					// colorArray[iz] = 1.0; // Full purple
+				} else {
+					// Smoothly return to original position
+					posArray[ix] += (originalPositions[ix] - posArray[ix]) * 0.03;
+					posArray[iy] += (originalPositions[iy] - posArray[iy]) * 0.03;
+					posArray[iz] += (originalPositions[iz] - posArray[iz]) * 0.03;
+
+					// Return to original colors
+					colorArray[ix] += (0.3 + Math.random() * 0.4 - colorArray[ix]) * 0.05;
+					colorArray[iy] += (0.1 + Math.random() * 0.3 - colorArray[iy]) * 0.05;
+					colorArray[iz] += (0.6 + Math.random() * 0.4 - colorArray[iz]) * 0.05;
+				}
+			}
+			
+			particles.geometry.attributes.position.needsUpdate = true;
+			particles.geometry.attributes.color.needsUpdate = true;
+
+			renderer.render(scene, camera);
+		}
+		
+		animate();
+
+		// Handle window resize
+		window.addEventListener('resize', () => {
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+			renderer.setSize(window.innerWidth, window.innerHeight);
+		});
+	});
+</script>
+
+<style>
+	/* Gradient Animation */
+	@keyframes gradient-x {
+		0%, 100% {
+			background-position: 0% 50%;
+		}
+		50% {
+			background-position: 100% 50%;
+		}
+	}
+	
+	.animate-gradient-x {
+		background-size: 200% 200%;
+		animation: gradient-x 3s ease infinite;
+	}
+	
+	/* Fade In Up Animation */
+	@keyframes fade-in-up {
+		from {
+			opacity: 0;
+			transform: translateY(30px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+	
+	.animate-fade-in-up {
+		animation: fade-in-up 0.8s ease-out forwards;
+	}
+	
+	.animation-delay-200 {
+		animation-delay: 0.2s;
+	}
+	
+	.animation-delay-400 {
+		animation-delay: 0.4s;
+	}
+	
+	.animation-delay-600 {
+		animation-delay: 0.6s;
+	}
+	
+	.animation-delay-800 {
+		animation-delay: 0.8s;
+	}
+	
+	/* Three.js canvas styling */
+	#threeContainer canvas {
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 0;
+		pointer-events: auto;
+	}
+</style> 

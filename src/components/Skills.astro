@@ -1,0 +1,145 @@
+---
+// Skills component
+const skillCategories = [
+	{
+		category: "Programming Languages",
+		skills: [
+			{ name: "Python", level: 95, icon: "🐍" },
+			{ name: "JavaScript", level: 90, icon: "⚡" },
+			{ name: "TypeScript", level: 85, icon: "📘" },
+			{ name: "Java", level: 80, icon: "☕" },
+			{ name: "Go", level: 75, icon: "🐹" }
+		]
+	},
+	{
+		category: "AI & Machine Learning",
+		skills: [
+			{ name: "TensorFlow", level: 90, icon: "🧠" },
+			{ name: "PyTorch", level: 85, icon: "🔥" },
+			{ name: "Scikit-learn", level: 88, icon: "🔬" },
+			{ name: "OpenAI API", level: 82, icon: "🤖" },
+			{ name: "Computer Vision", level: 78, icon: "👁️" }
+		]
+	},
+	{
+		category: "Frontend & Backend",
+		skills: [
+			{ name: "React", level: 92, icon: "⚛️" },
+			{ name: "Node.js", level: 88, icon: "🟢" },
+			{ name: "Next.js", level: 85, icon: "▲" },
+			{ name: "Django", level: 80, icon: "🐍" },
+			{ name: "FastAPI", level: 82, icon: "⚡" }
+		]
+	},
+	{
+		category: "Cloud & DevOps",
+		skills: [
+			{ name: "AWS", level: 85, icon: "☁️" },
+			{ name: "Docker", level: 80, icon: "🐳" },
+			{ name: "Kubernetes", level: 75, icon: "⚓" },
+			{ name: "CI/CD", level: 82, icon: "🔄" },
+			{ name: "Terraform", level: 70, icon: "🏗️" }
+		]
+	}
+];
+---
+
+<section id="skills" class="py-20 bg-white">
+	<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+		<!-- Section Header -->
+		<div class="text-center mb-16">
+			<div class="animate-fade-in-up">
+				<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+					Skills & Technologies
+				</h2>
+				<div class="w-20 h-1 bg-blue-600 rounded-full mx-auto"></div>
+				<p class="text-lg text-gray-600 mt-6 max-w-2xl mx-auto">
+					My technical expertise spans across AI/ML, full-stack development, and cloud technologies.
+				</p>
+			</div>
+		</div>
+		
+		<!-- Skills Grid -->
+		<div class="grid md:grid-cols-2 gap-12">
+			{skillCategories.map((category, categoryIndex) => (
+				<div class="animate-fade-in-up" style={`animation-delay: ${categoryIndex * 0.2}s`}>
+					<h3 class="text-xl font-semibold text-gray-900 mb-6 flex items-center">
+						<span class="mr-3">{category.category}</span>
+						<div class="flex-1 h-px bg-gray-300"></div>
+					</h3>
+					
+					<div class="space-y-4">
+						{category.skills.map((skill, skillIndex) => (
+							<div class="group">
+								<div class="flex items-center justify-between mb-2">
+									<div class="flex items-center space-x-3">
+										<span class="text-2xl">{skill.icon}</span>
+										<span class="font-medium text-gray-700">{skill.name}</span>
+									</div>
+									<span class="text-sm font-medium text-blue-600">{skill.level}%</span>
+								</div>
+								
+								<div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+									<div 
+										class="bg-gradient-to-r from-blue-500 to-purple-600 h-2 rounded-full transition-all duration-1000 ease-out transform origin-left"
+										style={`width: ${skill.level}%; animation-delay: ${(categoryIndex * 0.2 + skillIndex * 0.1)}s`}
+									></div>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+			))}
+		</div>
+		
+		<!-- Additional Skills -->
+		<div class="mt-16 animate-fade-in-up animation-delay-1000">
+			<h3 class="text-xl font-semibold text-gray-900 mb-8 text-center">Additional Skills</h3>
+			<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+				{[
+					"Git", "MongoDB", "PostgreSQL", "Redis", 
+					"GraphQL", "REST APIs", "Microservices", "Serverless",
+					"Data Analysis", "NLP", "Deep Learning", "MLOps"
+				].map((skill) => (
+					<div class="bg-gray-50 rounded-lg p-4 text-center hover:bg-blue-50 transition-colors duration-200">
+						<span class="font-medium text-gray-700">{skill}</span>
+					</div>
+				))}
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	@keyframes fade-in-up {
+		from {
+			opacity: 0;
+			transform: translateY(30px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+	
+	.animate-fade-in-up {
+		animation: fade-in-up 0.8s ease-out forwards;
+		opacity: 0;
+	}
+	
+	.animation-delay-1000 {
+		animation-delay: 1s;
+	}
+	
+	/* Progress bar animation */
+	.bg-gradient-to-r {
+		animation: progress-fill 1.5s ease-out forwards;
+		transform: scaleX(0);
+	}
+	
+	@keyframes progress-fill {
+		to {
+			transform: scaleX(1);
+		}
+	}
+</style> 
