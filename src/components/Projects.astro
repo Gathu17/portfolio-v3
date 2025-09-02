@@ -2,50 +2,79 @@
 // Projects component
 const projects = [
 	{
-		title: "AI-Powered Chat Assistant",
-		description: "A conversational AI assistant that uses natural language processing to provide intelligent responses and automate customer support.",
+		title: "EduManage Pro",
+		description: "",
 		image: "/api/placeholder/400/250",
 		technologies: ["Python", "TensorFlow", "React", "Node.js"],
 		link: "#",
 		github: "#",
-		category: "AI/ML"
+		category: "AI/ML",
+		features: [
+			"School management automation",
+			"AI-assisted grading and insights",
+			"Parent/student portal with notifications"
+		],
+		video: "https://www.w3schools.com/html/mov_bbb.mp4"
 	},
 	{
-		title: "Smart Analytics Dashboard",
+		title: "TransNet",
 		description: "Real-time analytics platform that processes large datasets and provides interactive visualizations and insights.",
 		image: "/api/placeholder/400/250",
 		technologies: ["TypeScript", "D3.js", "Python", "PostgreSQL"],
 		link: "#",
 		github: "#",
-		category: "Data Science"
+		category: "Data Science",
+		features: [
+			"Streaming ETL and alerting",
+			"Custom chart builder",
+			"Role-based access control"
+		],
+		video: "https://www.w3schools.com/html/mov_bbb.mp4"
 	},
 	{
-		title: "E-commerce AI Recommender",
+		title: "DocChat",
 		description: "Machine learning system that provides personalized product recommendations based on user behavior and preferences.",
 		image: "/api/placeholder/400/250",
 		technologies: ["Python", "Scikit-learn", "FastAPI", "Redis"],
 		link: "#",
 		github: "#",
-		category: "AI/ML"
+		category: "AI/ML",
+		features: [
+			"Hybrid collaborative + content-based model",
+			"A/B testing and lift measurement",
+			"Real-time feature store"
+		],
+		video: "https://www.w3schools.com/html/mov_bbb.mp4"
 	},
 	{
-		title: "Mobile Health App",
+		title: "NannyMatch",
 		description: "Cross-platform mobile application for health monitoring with AI-powered insights and predictive analytics.",
 		image: "/api/placeholder/400/250",
 		technologies: ["React Native", "Python", "TensorFlow Lite", "Firebase"],
 		link: "#",
 		github: "#",
-		category: "Mobile"
+		category: "Mobile",
+		features: [
+			"On-device inference for privacy",
+			"Wearables integration",
+			"Gamified engagement"
+		],
+		video: "https://www.w3schools.com/html/mov_bbb.mp4"
 	},
-	{
-		title: "Blockchain Supply Chain",
-		description: "Decentralized supply chain management system using blockchain technology for transparency and traceability.",
-		image: "/api/placeholder/400/250",
-		technologies: ["Solidity", "React", "Node.js", "IPFS"],
-		link: "#",
-		github: "#",
-		category: "Blockchain"
-	}
+	// {
+	// 	title: "Blockchain Supply Chain",
+	// 	description: "Decentralized supply chain management system using blockchain technology for transparency and traceability.",
+	// 	image: "/api/placeholder/400/250",
+	// 	technologies: ["Solidity", "React", "Node.js", "IPFS"],
+	// 	link: "#",
+	// 	github: "#",
+	// 	category: "Blockchain",
+	// 	features: [
+	// 		"Smart contracts for provenance",
+	// 		"QR-based tracking",
+	// 		"Tamper-proof audit trail"
+	// 	]
+	// }
 ];
 ---
 
@@ -55,7 +84,7 @@ const projects = [
 		<div class="text-center mb-16">
 			<div class="animate-fade-in-up">
 				<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-					Featured Projects
+					Some of my recent projects that users love
 				</h2>
 				<div class="w-20 h-1 bg-blue-600 rounded-full mx-auto"></div>
 				<p class="text-lg text-gray-600 mt-6 max-w-2xl mx-auto">
@@ -68,13 +97,17 @@ const projects = [
 		<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 			{projects.map((project, index) => (
 				<div class="group animate-fade-in-up" style={`animation-delay: ${index * 0.1}s`}>
-					<div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-						<!-- Project Image -->
-						<div class="relative h-48 bg-gradient-to-br from-blue-100 to-purple-100 overflow-hidden">
-							<div class="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20"></div>
-							<div class="absolute inset-0 flex items-center justify-center">
-								<svg class="w-16 h-16 text-blue-500 opacity-50" fill="currentColor" viewBox="0 0 20 20">
-									<path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
+					<div class="project-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2" data-project-index={index}>
+						<!-- Project Media (Video) -->
+						<div class="project-media relative h-48 bg-gradient-to-br from-blue-100 to-purple-100 overflow-hidden cursor-pointer media-toggle">
+							{project.video ? (
+								<video class="absolute inset-0 w-full h-full object-cover" src={project.video} autoplay muted loop playsinline></video>
+							) : (
+								<div class="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20"></div>
+							)}
+							<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+								<svg class="w-14 h-14 text-white/90 drop-shadow" viewBox="0 0 24 24" fill="currentColor">
+									<path d="M8 5v14l11-7z"/>
 								</svg>
 							</div>
 							<!-- Category Badge -->
@@ -87,37 +120,53 @@ const projects = [
 						
 						<!-- Project Content -->
 						<div class="p-6">
-							<h3 class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-200">
-								{project.title}
-							</h3>
+							<div class="flex items-start justify-between gap-4">
+								<h3 class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-200">
+									{project.title}
+								</h3>
+								<button class="project-close hidden items-center justify-center w-10 h-10 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200" aria-label="Close">
+									<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+									</svg>
+								</button>
+							</div>
 							<p class="text-gray-600 text-sm leading-relaxed mb-4">
 								{project.description}
 							</p>
 							
 							<!-- Technologies -->
-							<div class="flex flex-wrap gap-2 mb-6">
+							<div class="flex flex-wrap gap-2 mb-4">
 								{project.technologies.map((tech) => (
 									<span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-md">
 										{tech}
 									</span>
 								))}
 							</div>
-							
-							<!-- Project Links -->
-							<div class="flex space-x-4">
-								<a href={project.link} class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium text-sm transition-colors duration-200">
-									Live Demo
-									<svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-									</svg>
-								</a>
-								<a href={project.github} class="inline-flex items-center text-gray-600 hover:text-gray-700 font-medium text-sm transition-colors duration-200">
-									GitHub
-									<svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-										<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-									</svg>
-								</a>
+
+							<!-- In-card Details (shown when expanded) -->
+							<div class="project-details hidden border-t border-gray-100 pt-4">
+								<h4 class="text-sm font-semibold text-gray-900 mb-2">Key Features</h4>
+								<ul class="list-disc list-inside text-sm text-gray-700 space-y-1 mb-4">
+									{project.features?.map((feat) => (
+										<li>{feat}</li>
+									))}
+								</ul>
+								<div class="flex space-x-4">
+									<a href={project.link} class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium text-sm transition-colors duration-200">
+										Live Demo
+										<svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+										</svg>
+									</a>
+									<a href={project.github} class="inline-flex items-center text-gray-600 hover:text-gray-700 font-medium text-sm transition-colors duration-200">
+										GitHub
+										<svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+											<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+										</svg>
+									</a>
+								</div>
 							</div>
+
 						</div>
 					</div>
 				</div>
@@ -135,6 +184,44 @@ const projects = [
 		</div>
 	</div>
 </section>
+
+<script>
+	// In-card expand/collapse
+	document.addEventListener('DOMContentLoaded', () => {
+		const cards = document.querySelectorAll('.project-card');
+		cards.forEach((card) => {
+			const media = card.querySelector('.project-media');
+			const closeBtn = card.querySelector('.project-close');
+			const details = card.querySelector('.project-details');
+			const video = card.querySelector('video');
+
+			function expand() {
+				card.classList.add('expanded');
+				details && details.classList.remove('hidden');
+				closeBtn && closeBtn.classList.remove('hidden');
+				document.body.classList.add('overflow-hidden');
+				if (video) {
+					video.setAttribute('controls', '');
+					try { video.currentTime = 0; video.play && video.play(); } catch (_) {}
+				}
+			}
+
+			function collapse() {
+				card.classList.remove('expanded');
+				details && details.classList.add('hidden');
+				closeBtn && closeBtn.classList.add('hidden');
+				document.body.classList.remove('overflow-hidden');
+				if (video) {
+					try { video.pause && video.pause(); } catch (_) {}
+					video.removeAttribute('controls');
+				}
+			}
+
+			media && media.addEventListener('click', expand);
+			closeBtn && closeBtn.addEventListener('click', (e) => { e.stopPropagation(); collapse(); });
+		});
+	});
+</script>
 
 <style>
 	@keyframes fade-in-up {
@@ -155,5 +242,25 @@ const projects = [
 	
 	.animation-delay-1000 {
 		animation-delay: 1s;
+	}
+
+	/* Expanded card styles */
+	.project-card.expanded {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 50;
+		border-radius: 0;
+		transform: none;
+		margin: 0;
+	}
+	.project-card.expanded .project-media {
+		height: 56vh;
+	}
+	.project-card.expanded .p-6 {
+		max-height: 44vh;
+		overflow: auto;
 	}
 </style> 
