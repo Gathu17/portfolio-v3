@@ -3,78 +3,93 @@
 const projects = [
 	{
 		title: "EduManage Pro",
-		description: "",
+		description: "Comprehensive school management system with bulk SMS, attendance tracking, easy marks entry, and integrated dashboards for students, parents, and staff.",
 		image: "/api/placeholder/400/250",
-		technologies: ["Python", "TensorFlow", "React", "Node.js"],
+		technologies: ["Laravel", "Nuxtjs", "React Native", "PostgreSQL"],
 		link: "#",
 		github: "#",
-		category: "AI/ML",
+		category: "Education",
+		platforms: ["Web", "Mobile"],
 		features: [
-			"School management automation",
-			"AI-assisted grading and insights",
-			"Parent/student portal with notifications"
+			"Bulk SMS notifications",
+			"Student & staff attendance tracking",
+			"Easy marks entry with mobile app",
+			"Student/parent dashboard",
+			"Timetable management",
+			"Automated report generation"
 		],
-		video: "https://www.w3schools.com/html/mov_bbb.mp4"
+		video: "/video/"
 	},
 	{
 		title: "TransNet",
-		description: "Real-time analytics platform that processes large datasets and provides interactive visualizations and insights.",
+		description: "Advanced wireless billing system for MikroTik routers featuring seamless payment integration, SMS notifications, and remote management capabilities.",
 		image: "/api/placeholder/400/250",
-		technologies: ["TypeScript", "D3.js", "Python", "PostgreSQL"],
+		technologies: ["Laravel", "RouterOS API", "Daraja API", "React", "Redis", "MySQL"],
 		link: "#",
 		github: "#",
-		category: "Data Science",
+		category: "Telecom",
+		platforms: ["Web"],
 		features: [
-			"Streaming ETL and alerting",
-			"Custom chart builder",
-			"Role-based access control"
+			"MPESA payment integration",
+			"SMS notification system",
+			"Remote router management",
+			"Customizable interface",
+			"24/7 technical support"
 		],
-		video: "https://www.w3schools.com/html/mov_bbb.mp4"
+		video: "/video/transnet.mp4"
 	},
 	{
 		title: "DocChat",
-		description: "Machine learning system that provides personalized product recommendations based on user behavior and preferences.",
+		description: "AI chatbot application that uses RAG (Retrieval-Augmented Generation) to chat with documents and extract relevant information instantly.",
 		image: "/api/placeholder/400/250",
-		technologies: ["Python", "Scikit-learn", "FastAPI", "Redis"],
+		technologies: ["FastAPI", "OpenAI", "LangGraph", "ChromaDB", "Pydantic"],
 		link: "#",
-		github: "#",
+		github: "https://github.com/Gathu17/RAG-chatbot",
 		category: "AI/ML",
+		platforms: ["Web"],
 		features: [
-			"Hybrid collaborative + content-based model",
-			"A/B testing and lift measurement",
-			"Real-time feature store"
+			"RAG-powered document analysis",
+			"Instant information retrieval",
+			"Natural language queries",
+			"Multi-format document support",
+			"Context-aware responses"
 		],
-		video: "https://www.w3schools.com/html/mov_bbb.mp4"
+		video: "/video/docchat.mp4"
 	},
 	{
 		title: "NannyMatch",
-		description: "Cross-platform mobile application for health monitoring with AI-powered insights and predictive analytics.",
+		description: "Smart nanny-client matching platform featuring dedicated dashboards, online booking system, real-time messaging, and job posting capabilities.",
 		image: "/api/placeholder/400/250",
-		technologies: ["React Native", "Python", "TensorFlow Lite", "Firebase"],
+		technologies: ["Nuxtjs", "Node.js", "PostgreSQL", "Socket.io"],
 		link: "#",
 		github: "#",
-		category: "Mobile",
+		category: "Marketplace",
+		platforms: ["Web"],
 		features: [
-			"On-device inference for privacy",
-			"Wearables integration",
-			"Gamified engagement"
+			"Nanny & client dashboards",
+			"Online booking system",
+			"Real-time messaging",
+			"Job posting & matching",
+			"Review & rating system"
 		],
-		video: "https://www.w3schools.com/html/mov_bbb.mp4"
+		video: "/video/nanny.mp4"
 	},
-	// {
-	// 	title: "Blockchain Supply Chain",
-	// 	description: "Decentralized supply chain management system using blockchain technology for transparency and traceability.",
-	// 	image: "/api/placeholder/400/250",
-	// 	technologies: ["Solidity", "React", "Node.js", "IPFS"],
-	// 	link: "#",
-	// 	github: "#",
-	// 	category: "Blockchain",
-	// 	features: [
-	// 		"Smart contracts for provenance",
-	// 		"QR-based tracking",
-	// 		"Tamper-proof audit trail"
-	// 	]
-	// }
+	{
+		title: "FitApp",
+		description: "A simple web application that provides fitness exercise recommendations based on natural language queries, using Google Cloud's Vertex AI for semantic search and text-to-speech capabilities",
+		image: "/api/placeholder/400/250",
+		technologies: ["Langchain", "Vertex AI", "Node.js", "Firestore"],
+		link: "#",
+		github: "https://github.com/Gathu17/fitness-recommender-app",
+		category: "AI/ML",
+		features: [
+			"Personalized exercise recommendations",
+			"Semantic search with Vertex AI",
+			"Text-to-speech exercise instructions",
+			"Real-time response"
+		],
+		video: "/video/fitness.mp4"
+	}
 ];
 ---
 
@@ -84,7 +99,7 @@ const projects = [
 		<div class="text-center mb-16">
 			<div class="animate-fade-in-up">
 				<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-					Some of my recent projects that users love
+					Some of my products that users love
 				</h2>
 				<div class="w-20 h-1 bg-blue-600 rounded-full mx-auto"></div>
 				<p class="text-lg text-gray-600 mt-6 max-w-2xl mx-auto">
@@ -99,17 +114,17 @@ const projects = [
 				<div class="group animate-fade-in-up" style={`animation-delay: ${index * 0.1}s`}>
 					<div class="project-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2" data-project-index={index}>
 						<!-- Project Media (Video) -->
-						<div class="project-media relative h-48 bg-gradient-to-br from-blue-100 to-purple-100 overflow-hidden cursor-pointer media-toggle">
+						<div class="project-media relative h-48 bg-gradient-to-br from-blue-100 to-purple-100 overflow-hidden">
 							{project.video ? (
 								<video class="absolute inset-0 w-full h-full object-cover" src={project.video} autoplay muted loop playsinline></video>
 							) : (
 								<div class="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20"></div>
 							)}
-							<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+							{/* <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
 								<svg class="w-14 h-14 text-white/90 drop-shadow" viewBox="0 0 24 24" fill="currentColor">
 									<path d="M8 5v14l11-7z"/>
 								</svg>
-							</div>
+							</div> */}
 							<!-- Category Badge -->
 							<div class="absolute top-4 left-4">
 								<span class="px-3 py-1 bg-blue-600 text-white text-xs font-medium rounded-full">
@@ -120,15 +135,20 @@ const projects = [
 						
 						<!-- Project Content -->
 						<div class="p-6">
-							<div class="flex items-start justify-between gap-4">
-								<h3 class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-200">
-									{project.title}
-								</h3>
-								<button class="project-close hidden items-center justify-center w-10 h-10 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200" aria-label="Close">
-									<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-									</svg>
-								</button>
+							<h3 class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-200">
+								{project.title}
+							</h3>
+							<!-- Platform Tags -->
+							<div class="flex flex-wrap gap-1 mb-3">
+								{project.platforms?.map((platform) => (
+									<span class={`px-2 py-1 text-xs font-medium rounded-full ${
+										platform === 'Web' 
+											? 'bg-green-100 text-green-800' 
+											: 'bg-blue-100 text-blue-800'
+									}`}>
+										{platform}
+									</span>
+								))}
 							</div>
 							<p class="text-gray-600 text-sm leading-relaxed mb-4">
 								{project.description}
@@ -143,30 +163,42 @@ const projects = [
 								))}
 							</div>
 
-							<!-- In-card Details (shown when expanded) -->
-							<div class="project-details hidden border-t border-gray-100 pt-4">
+							<!-- View Features Button -->
+							<button class="view-features-btn w-full flex items-center justify-between px-4 py-2 bg-gray-50 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-100 transition-colors duration-200 mb-4">
+								<span>View Features</span>
+								<svg class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+								</svg>
+							</button>
+
+							<!-- Features Section (hidden by default) -->
+							<div class="project-features hidden border-t border-gray-100 pt-4 mb-4">
 								<h4 class="text-sm font-semibold text-gray-900 mb-2">Key Features</h4>
-								<ul class="list-disc list-inside text-sm text-gray-700 space-y-1 mb-4">
+								<ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
 									{project.features?.map((feat) => (
 										<li>{feat}</li>
 									))}
 								</ul>
-								<div class="flex space-x-4">
-									<a href={project.link} class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium text-sm transition-colors duration-200">
-										Live Demo
-										<svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-										</svg>
-									</a>
-									<a href={project.github} class="inline-flex items-center text-gray-600 hover:text-gray-700 font-medium text-sm transition-colors duration-200">
-										GitHub
-										<svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-											<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-										</svg>
-									</a>
-								</div>
 							</div>
 
+							<!-- Action Buttons -->
+							<div class="flex flex-col gap-2">
+								{project.category === "AI/ML" && project.github && project.github !== "#" ? (
+									<a href={project.github} target="_blank" class="w-full inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200">
+										<svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+											<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+										</svg>
+										View Source Code
+									</a>
+								) : (
+									<a href={`https://wa.me/254726945514?text=${encodeURIComponent(`Hi! I'm interested in requesting a demo for ${project.title}. ${project.description}`)}`} target="_blank" class="w-full inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200">
+										Request Demo
+									</a>
+								)}
+								<a href={`https://wa.me/254726945514?text=${encodeURIComponent(`Hi! I need a similar solution to ${project.title}. I'm looking for: ${project.features?.slice(0, 3).join(', ')}. Can you help me build something similar?`)}`} target="_blank" class="w-full inline-flex items-center justify-center px-4 py-2 border border-blue-600 text-blue-600 text-sm font-medium rounded-lg hover:bg-blue-50 transition-colors duration-200">
+									Get Similar Solution
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -175,50 +207,37 @@ const projects = [
 		
 		<!-- View More Button -->
 		<div class="text-center mt-12 animate-fade-in-up animation-delay-1000">
-			<a href="#" class="inline-flex items-center justify-center px-8 py-4 border-2 border-blue-600 text-blue-600 font-semibold rounded-lg hover:bg-blue-600 hover:text-white transform hover:scale-105 transition-all duration-300">
-				View All Projects
-				<svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-				</svg>
+			<p class="text-gray-600 mb-4">Need a tailored solution for your business needs? Let's talk!</p>
+			<a href="https://wa.me/254726945514?text=Hi! I'd like to schedule a call to discuss a tailored solution for my business needs." target="_blank" class="inline-flex items-center justify-center px-8 py-4 border-2 border-blue-600 text-blue-600 font-semibold rounded-lg hover:bg-blue-600 hover:text-white transform hover:scale-105 transition-all duration-300">
+				Schedule a call
+				
 			</a>
 		</div>
 	</div>
 </section>
 
 <script>
-	// In-card expand/collapse
+	// Toggle features section with caret
 	document.addEventListener('DOMContentLoaded', () => {
-		const cards = document.querySelectorAll('.project-card');
-		cards.forEach((card) => {
-			const media = card.querySelector('.project-media');
-			const closeBtn = card.querySelector('.project-close');
-			const details = card.querySelector('.project-details');
-			const video = card.querySelector('video');
+		const featureButtons = document.querySelectorAll('.view-features-btn');
+		featureButtons.forEach((btn) => {
+			const card = btn.closest('.project-card') as HTMLElement;
+			const features = card?.querySelector('.project-features') as HTMLElement;
+			const caret = btn.querySelector('svg') as SVGElement;
 
-			function expand() {
-				card.classList.add('expanded');
-				details && details.classList.remove('hidden');
-				closeBtn && closeBtn.classList.remove('hidden');
-				document.body.classList.add('overflow-hidden');
-				if (video) {
-					video.setAttribute('controls', '');
-					try { video.currentTime = 0; video.play && video.play(); } catch (_) {}
+			if (!card || !features || !caret) return;
+
+			btn.addEventListener('click', () => {
+				const isHidden = features.classList.contains('hidden');
+				
+				if (isHidden) {
+					features.classList.remove('hidden');
+					caret.style.transform = 'rotate(180deg)';
+				} else {
+					features.classList.add('hidden');
+					caret.style.transform = 'rotate(0deg)';
 				}
-			}
-
-			function collapse() {
-				card.classList.remove('expanded');
-				details && details.classList.add('hidden');
-				closeBtn && closeBtn.classList.add('hidden');
-				document.body.classList.remove('overflow-hidden');
-				if (video) {
-					try { video.pause && video.pause(); } catch (_) {}
-					video.removeAttribute('controls');
-				}
-			}
-
-			media && media.addEventListener('click', expand);
-			closeBtn && closeBtn.addEventListener('click', (e) => { e.stopPropagation(); collapse(); });
+			});
 		});
 	});
 </script>
@@ -242,25 +261,5 @@ const projects = [
 	
 	.animation-delay-1000 {
 		animation-delay: 1s;
-	}
-
-	/* Expanded card styles */
-	.project-card.expanded {
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		z-index: 50;
-		border-radius: 0;
-		transform: none;
-		margin: 0;
-	}
-	.project-card.expanded .project-media {
-		height: 56vh;
-	}
-	.project-card.expanded .p-6 {
-		max-height: 44vh;
-		overflow: auto;
 	}
 </style> 
