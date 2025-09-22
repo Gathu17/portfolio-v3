@@ -18,7 +18,7 @@ const projects = [
 			"Timetable management",
 			"Automated report generation"
 		],
-		video: "/assets/video/"
+		video: "/src/assets/video/edumanage.mp4"
 	},
 	{
 		title: "TransNet",
@@ -36,7 +36,7 @@ const projects = [
 			"Customizable interface",
 			"24/7 technical support"
 		],
-		video: "/assets/video/transnet.mp4"
+		video: "/src/assets/video/transnet.mp4"
 	},
 	{
 		title: "DocChat",
@@ -54,7 +54,7 @@ const projects = [
 			"Multi-format document support",
 			"Context-aware responses"
 		],
-		video: "/assets/video/docchat.mp4"
+		video: "/src/assets/video/docchat.mp4"
 	},
 	{
 		title: "NannyMatch",
@@ -72,7 +72,7 @@ const projects = [
 			"Job posting & matching",
 			"Review & rating system"
 		],
-		video: "/assets/video/nanny.mp4"
+		video: "/src/assets/video/nanny.mp4"
 	},
 	{
 		title: "FitApp",
@@ -88,7 +88,7 @@ const projects = [
 			"Text-to-speech exercise instructions",
 			"Real-time response"
 		],
-		video: "/assets/video/fitness.mp4"
+		video: "/src/assets/video/fitness.mp4"
 	}
 ];
 ---
@@ -117,6 +117,8 @@ const projects = [
 						<div class="project-media relative h-48 bg-gradient-to-br from-blue-100 to-purple-100 overflow-hidden">
 							{project.video ? (
 								<video class="absolute inset-0 w-full h-full object-cover" src={project.video} autoplay muted loop playsinline></video>
+							) : project.videoURL ? (
+								<iframe class="absolute inset-0 w-full h-full" src={project.videoURL} frameborder="0" allowfullscreen></iframe>
 							) : (
 								<div class="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20"></div>
 							)}
